@@ -1,6 +1,6 @@
 from openai import OpenAI
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = ""
 # Thay "YOUR_API_KEY" bằng API key của bạn
 
 client = OpenAI(
