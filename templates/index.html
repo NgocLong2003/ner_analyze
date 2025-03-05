@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER Text Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Left side for input -->
+        <div class="left">
+            <h3>Input text:</h3>
+            <form method="POST">
+                <textarea name="input_text" rows="10" placeholder="Enter text here...">{{ text }}</textarea><br>
+                <button type="submit">Analyze NER</button>
+            </form>
+        </div>
+
+<!-- Right side for output -->
+<div class="right">
+    {% if entities %}
+        <h3>Results:</h3>
+
+        <!-- Các ô để tắt bật highlight -->
+        <div class="highlight-buttons">
+            <div class="legendTags">
+                <span class="entity highlight" data-posTag="Loại từ" data-nerLabel="O">
+                <span class="entity-text" data-meaning="Đây là 1 cụm từ tách ra">
+                    Cụm từ
+                </span>
+                <span class="posTag" data-tooltip="Loại từ" onclick="selectPosTag(event)">
+                    Loại từ
+                </span>
+            </span></div>
+            <button id="date-btn" class="highlight-btn" onclick="toggleHighlight('DATE')">DATE</button>
+            <button id="loc-btn" class="highlight-btn" onclick="toggleHighlight('LOC')">LOC</button>
+            <button id="org-btn" class="highlight-btn" onclick="toggleHighlight('ORG')">ORG</button>
+            <button id="per-btn" class="highlight-btn" onclick="toggleHighlight('PER')">PER</button>
+        </div>
+    
+        <!-- Khung cố định chiều cao cho textWithTags -->
+        <div class="textWithTags">
+            {% for ent in entities %}
+                <span class="entity highlight" data-posTag="{{ ent['posTag'] }}" data-nerLabel="{{ ent['nerLabel'] }}">
+                    <span class="entity-text" data-meaning="{{ ent['meaning'] if ent['meaning'] else 'Chưa có chú giải cho từ này' }}">
+                        {{ ent['text'] }}
+                    </span>
+                    <span class="posTag" data-tooltip="{{ pos_tag_dict.get(ent['posTag'], 'chưa rõ') }}" onclick="selectPosTag(event)">
+                        {{ ent['posTag'] }}
+                    </span>
+                </span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+        
+
+    <script>
+//
+let highlightState = {
+    DATE: true,
+    LOC: true,
+    ORG: true,
+    PER: true
+};
+
+function toggleHighlight(nerLabel) {
+    // Lấy nút tương ứng với nerLabel
+    const button = document.getElementById(`${nerLabel.toLowerCase()}-btn`);
+    
+    // Thay đổi trạng thái của highlight
+    highlightState[nerLabel] = !highlightState[nerLabel];
+
+    // Cập nhật màu sắc của nút (tắt - xám, bật - màu sắc đặc trưng)
+    if (highlightState[nerLabel]) {
+        button.classList.remove('disabled');
+    } else {
+        button.classList.add('disabled');
+    }
+
+    // Lấy tất cả các entity
+    const entities = document.querySelectorAll('.entity');
+
+    entities.forEach(entity => {
+        const entityLabel = entity.getAttribute('data-nerLabel');
+        
+        // Nếu highlight bật, áp dụng màu tương ứng
+        if (highlightState[nerLabel]) {
+            if (entityLabel === nerLabel) {
+                entity.classList.add(nerLabel.toLowerCase());  // Thêm màu vào phần tử entity
+            }
+        } else {
+            if (entityLabel === nerLabel) {
+                entity.classList.remove(nerLabel.toLowerCase());  // Loại bỏ màu
+            }
+        }
+    });
+}
+
+// Khi trang được tải, đảm bảo highlight cho các nerLabel mặc định
+document.addEventListener("DOMContentLoaded", function() {
+    // Áp dụng màu sắc cho các phần tử highlight từ trạng thái bật đầu tiên
+    for (let nerLabel in highlightState) {
+        const button = document.getElementById(`${nerLabel.toLowerCase()}-btn`);
+        
+        // Cập nhật màu sắc của nút (tắt - xám, bật - màu sắc đặc trưng)
+        if (highlightState[nerLabel]) {
+            button.classList.remove('disabled');
+            button.classList.add(nerLabel.toLowerCase());  // Thêm lớp màu sắc cho nút (tương ứng với nerLabel)
+        } else {
+            button.classList.add('disabled');
+        }
+
+        // Áp dụng màu sắc cho các phần tử tương ứng với nerLabel
+        const entities = document.querySelectorAll('.entity');
+        entities.forEach(entity => {
+            if (entity.getAttribute('data-nerLabel') === nerLabel) {
+                entity.classList.add(nerLabel.toLowerCase()); // Thêm màu vào phần tử entity
+            }
+        });
+    }
+});
+
+
+
+
+
+
+let selectedPosTag = null;
+
+function selectPosTag(event) {
+    const posTag = event.target;
+    const posTagValue = posTag.innerText;
+
+    // Kiểm tra nếu đã có posTag nào được chọn
+    if (selectedPosTag && selectedPosTag !== posTag) {
+        // Nếu đã có posTag được chọn, quay lại trạng thái bình thường
+        resetPosTags();
+    }
+
+    // Nếu không có posTag được chọn, chọn posTag này
+    if (selectedPosTag !== posTag) {
+        // Đánh dấu posTag được chọn
+        selectedPosTag = posTag;
+
+        // Lấy tất cả các thực thể có posTag giống
+        const allEntities = document.querySelectorAll('.entity');
+        const allPosTags = document.querySelectorAll('.posTag'); // Lấy tất cả các posTag
+
+        // Tắt tất cả các highlight
+        allEntities.forEach(entity => {
+            entity.classList.remove('highlight');
+        });
+
+        // Đảm bảo tất cả các posTag cùng loại sẽ in đậm và màu đen, các posTag khác sẽ màu xám nhạt
+        allPosTags.forEach(tag => {
+            if (tag.innerText === posTagValue) {
+                tag.style.fontWeight = 'bold'; // In đậm các posTag cùng loại
+                tag.style.color = 'black'; // Màu đen cho các posTag cùng loại
+            } else {
+                tag.style.fontWeight = 'normal'; // Không in đậm các posTag khác
+                tag.style.color = 'lightgray'; // Màu xám nhạt cho các posTag khác
+            }
+        });
+
+        // Chỉnh màu cho các text có cùng posTag
+        allEntities.forEach(entity => {
+            const entityPosTag = entity.getAttribute('data-posTag');
+            
+            if (entityPosTag === posTagValue) {
+                // Làm cho text có cùng posTag in đậm và màu tím
+                entity.querySelector('.entity-text').style.fontWeight = 'bold';
+                entity.querySelector('.entity-text').style.color = 'purple';
+            } else {
+                // Làm cho text không phải cùng posTag có màu xám nhạt
+                entity.querySelector('.entity-text').style.color = 'lightgray';
+            }
+        });
+    } else {
+        // Nếu đã chọn lại posTag, quay về trạng thái bình thường
+        resetPosTags();
+    }
+}
+
+function resetPosTags() {
+    const allEntities = document.querySelectorAll('.entity');
+    const allPosTags = document.querySelectorAll('.posTag');
+    // Tắt tất cả các highlight
+    allEntities.forEach(entity => {
+    entity.classList.add('highlight');
+    });
+
+    // Hủy bỏ tất cả các trạng thái chọn
+    allEntities.forEach(entity => {
+        entity.querySelector('.entity-text').style.color = ''; // Reset màu sắc text
+        entity.querySelector('.entity-text').style.fontWeight = ''; // Reset font-weight
+    });
+
+    allPosTags.forEach(tag => {
+        tag.style.fontWeight = ''; // Reset font-weight cho posTag
+        tag.style.color = ''; // Reset màu sắc posTag
+    });
+
+    selectedPosTag = null;
+}
+
+// Đặt lại khi nhấp vào ngoài các posTag
+document.addEventListener('click', function (event) {
+    if (!event.target.closest('.posTag')) {
+        resetPosTags();
+    }
+});
+
+        
+        //Hàm để tìm kiếm
+        document.addEventListener("DOMContentLoaded", function () {
+    const textElements = document.querySelectorAll(".entity-text");
+
+    textElements.forEach(textElement => {
+        let tooltipVisible = false; // Biến để kiểm tra trạng thái tooltip (hiện hay không)
+
+        // Khi người dùng hover vào text, tooltip sẽ hiển thị
+        textElement.addEventListener("mouseover", function () {
+            // Nếu tooltip đã được giữ lại sau khi click, không làm gì
+            if (tooltipVisible) return;
+
+            // Nếu tooltip đã tồn tại, xóa tooltip trước đó
+            if (textElement._tooltip) {
+                textElement._tooltip.remove();
+                textElement._tooltip = null; // Đảm bảo tooltip đã được loại bỏ
+            }
+
+            const tooltip = document.createElement("div");
+            tooltip.classList.add("tooltip");
+
+            const meaning = textElement.getAttribute("data-meaning");
+
+            const meaningDiv = document.createElement("div");
+            meaningDiv.innerText = meaning;
+            tooltip.appendChild(meaningDiv);
+
+            // Nếu meaning rỗng (được gán là "Chưa có chú giải cho từ này"), thêm nút tra cứu Wikipedia
+            if (meaning === "Chưa có chú giải cho từ này") {
+                const wikiButton = document.createElement("button");
+                wikiButton.innerText = "Tra cứu Wikipedia";
+                wikiButton.addEventListener("click", function (e) {
+                    e.stopPropagation(); // Ngăn tooltip bị xóa khi click vào nút
+                    
+                    const query = textElement.innerText.trim();
+                    const nerLabel = textElement.getAttribute("data-nerLabel");  // Lấy nerLabel từ thuộc tính của phần tử
+                    
+                    // Gửi yêu cầu tới backend /search với query và nerLabel
+                    window.fetch(`/search?query=${encodeURIComponent(query)}&nerLabel=${encodeURIComponent(nerLabel)}`)
+                        .then(response => response.text())  // Nhận kết quả dưới dạng text
+                        .then(data => {
+                            // Cập nhật kết quả vào phần text của thực thể
+                            textElement.setAttribute("data-meaning", data);  // Cập nhật data-meaning với kết quả trả về
+                            textElement._tooltip.querySelector("div").innerText = data;  // Cập nhật tooltip
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+                tooltip.appendChild(document.createElement("br"));
+                tooltip.appendChild(wikiButton);
+            }
+
+            document.body.appendChild(tooltip);
+
+            // Định vị tooltip dựa vào vị trí của text
+            let rect = textElement.getBoundingClientRect();
+            tooltip.style.position = "absolute";
+            tooltip.style.top = `${window.scrollY + rect.top - tooltip.offsetHeight - 5}px`;
+            tooltip.style.left = `${window.scrollX + rect.left + rect.width / 2}px`;
+            tooltip.style.transform = "translateX(-50%)";
+            tooltip.style.visibility = "visible";
+
+            // Thêm lớp visible để tooltip hiển thị mượt mà
+            tooltip.classList.add("visible");
+
+            textElement._tooltip = tooltip;
+
+            // Khi chuột di chuyển ra ngoài text hoặc tooltip, kiểm tra khoảng cách và xóa tooltip nếu không có phần tử nào được chứa
+            tooltip.addEventListener("mouseleave", function (e) {
+                // Chỉ xóa tooltip khi không phải click vào tooltip
+                if (!textElement.contains(e.relatedTarget) && !tooltip.contains(e.relatedTarget) && !tooltipVisible) {
+                    tooltip.remove();
+                    textElement._tooltip = null;
+                }
+            });
+
+            // Khi chuột di chuyển vào tooltip, không làm gì cả (giữ tooltip không bị xóa)
+            tooltip.addEventListener("mouseenter", function () {
+                // Tooltip vẫn giữ nguyên khi di chuột vào
+            });
+        });
+
+        // Khi người dùng click vào text, giữ tooltip hiển thị cho đến khi click ra ngoài màn hình
+        textElement.addEventListener("click", function (e) {
+            // Nếu tooltip đã tồn tại và đang hiển thị, không làm gì
+            if (tooltipVisible) return;
+
+            tooltipVisible = true; // Đánh dấu tooltip đã được giữ lại
+
+            // Tạo tooltip nếu chưa có
+            if (!textElement._tooltip) {
+                const tooltip = document.createElement("div");
+                tooltip.classList.add("tooltip");
+
+                const meaning = textElement.getAttribute("data-meaning");
+                const meaningDiv = document.createElement("div");
+                meaningDiv.innerText = meaning;
+                tooltip.appendChild(meaningDiv);
+
+                document.body.appendChild(tooltip);
+
+                // Định vị tooltip dựa vào vị trí của text
+                let rect = textElement.getBoundingClientRect();
+                tooltip.style.position = "absolute";
+                tooltip.style.top = `${window.scrollY + rect.top - tooltip.offsetHeight - 5}px`;
+                tooltip.style.left = `${window.scrollX + rect.left + rect.width / 2}px`;
+                tooltip.style.transform = "translateX(-50%)";
+                tooltip.style.visibility = "visible";
+
+                // Thêm lớp visible để tooltip hiển thị mượt mà
+                tooltip.classList.add("visible");
+
+                textElement._tooltip = tooltip;
+            }
+
+            
+            
+        });
+        // Lắng nghe click trên toàn trang để ẩn tooltip khi nhấn ra ngoài
+        document.addEventListener("click", function (e) {
+                if (!textElement.contains(e.target) && !textElement._tooltip.contains(e.target)) {
+                    textElement._tooltip.remove();
+                    textElement._tooltip = null;
+                    tooltipVisible = false; // Đánh dấu tooltip đã bị ẩn
+                }
+            }); // { once: true } đảm bảo sự kiện chỉ lắng nghe một lần và sau đó sẽ tự động hủy bỏ
+
+        // Khi chuột di chuyển ra ngoài text, kiểm tra và xóa tooltip nếu không phải đang giữ lại
+        textElement.addEventListener("mouseleave", function (e) {
+            const tooltip = textElement._tooltip;
+            // Mở rộng vùng kiểm tra khi chuột di chuyển ra khỏi text và tooltip
+            if (tooltip && !tooltip.contains(e.relatedTarget) && !textElement.contains(e.relatedTarget) && !tooltipVisible) {
+                tooltip.remove();
+                textElement._tooltip = null;
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

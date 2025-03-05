@@ -1,0 +1,4 @@
+wikipedia-api
+vncorenlp
+dateparser
+flask

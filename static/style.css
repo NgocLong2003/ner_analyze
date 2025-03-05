@@ -1,0 +1,399 @@
+/* Reset các margin và padding cho toàn bộ trang */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Đặt font mặc định cho toàn bộ trang */
+body, html {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    padding: 0;
+    margin: 0;
+    height: 100%;  /* Đảm bảo chiều cao của trang chiếm toàn bộ màn hình */
+    overflow: hidden;  /* Ẩn thanh cuộn ngoài toàn bộ trang */
+}
+
+/* Container chính, chứa cả hai phần trái và phải */
+.container {
+    display: flex;
+    gap: 30px;
+    margin: 20px auto;  
+    width: 100%;  /* Chiếm toàn bộ chiều rộng màn hình */
+    height: calc(100vh - 40px);  /* Chiều cao bằng với chiều cao của màn hình trừ đi margin */
+}
+
+/* Phần bên trái */
+.left {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-right: 10px;
+    height: 100%;  /* Chiếm toàn bộ chiều cao màn hình */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;  /* Ẩn thanh cuộn trong phần bên trái */
+}
+
+/* Điều chỉnh khối textarea */
+textarea {
+    width: 100%;
+    height: calc(100vh - 200px);  /* Chiều cao lớn hơn, chiếm phần lớn chiều cao */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    resize: none;  /* Ngừng thay đổi kích thước textarea */
+}
+
+/* Nút "Analyze NER" */
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Phần bên phải */
+.right {
+    flex: 2;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 100%;  /* Chiều cao của phần bên phải chiếm toàn bộ chiều cao màn hình */
+    overflow: hidden;  /* Ẩn thanh cuộn trong phần bên phải */
+}
+
+/* Tiêu đề "Results" */
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Các nút highlight (DATE, LOC, ORG, PER) */
+.highlight-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}
+
+.legendTags {
+    display: flex;
+    flex-wrap: wrap;
+    height: 60px;  /* Đảm bảo khung không vượt quá chiều cao */
+    position: relative;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fafafa; /* Màu nền cho textWithTags */
+    text-align: center;
+}
+
+.entity-text, .posTag {
+    white-space: nowrap;  /* Prevent text from wrapping */
+}
+
+
+.textWithTags {
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100vh - 225px);  /* Đảm bảo khung không vượt quá chiều cao */
+    overflow-y: auto;  /* Thanh cuộn khi vượt quá chiều cao */
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fafafa; /* Màu nền cho textWithTags */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ccc;
+}
+
+
+/* Các nút highlight (DATE, LOC, ORG, PER) */
+.highlight-buttons {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    justify-content: baseline   ;
+}
+
+/* Các nút trong highlight */
+.highlight-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 2px solid transparent;
+}
+
+
+.highlight-btn:hover {
+    transform: scale(1.05);
+}
+
+.highlight-btn.date.disabled {
+    background-color: #ddd;
+    color: #666;
+}
+.highlight-btn.loc.disabled {
+    background-color: #ddd;
+    color: #666;
+}
+.highlight-btn.org.disabled {
+    background-color: #ddd;
+    color: #666;
+}
+.highlight-btn.per.disabled {
+    background-color: #ddd;
+    color: #666;
+}
+
+.highlight-btn.date {
+    background-color: #28a745;
+    color: white;
+}
+
+.highlight-btn.loc {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.highlight-btn.org {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.highlight-btn.per {
+    background-color: #dc3545;
+    color: white;
+}
+
+.entity {
+    background-color: transparent;
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.entity-text {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.posTag {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Tooltip khi hover vào posTag */
+.posTag:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Các phần tử highlight theo nerLabel */
+.highlight.date {
+    background-color: #28a745;
+}
+
+.highlight.loc {
+    background-color: #17a2b8;
+}
+
+.highlight.org {
+    background-color: #fd7e14;
+}
+
+.highlight.per {
+    background-color: #dc3545;
+}
+
+/* Default không có màu cho 'O' */
+.highlight {
+    background-color: transparent;
+}
+
+/* Màu sắc mặc định cho posTag khi không có highlight */
+.posTag {
+    color: #6c757d; /* Màu xám nhạt cho các posTag mặc định */
+    position: relative;  /* Để tooltip hiển thị đúng */
+}
+
+/* Màu trắng nhạt cho posTag khi entity có highlight (với highlight như .loc, .date, .per, .org) */
+.entity.highlight .posTag {
+    color: #6c757d;  /* Trắng nhạt */
+}
+
+/* Khi tắt highlight, posTag có màu như mặc định */
+.entity.highlight.date .posTag,
+.entity.highlight.loc .posTag,
+.entity.highlight.org .posTag,
+.entity.highlight.per .posTag {
+    color: #dcdcdc; /* Trắng nhạt cho posTag khi các highlight bật */
+}
+
+/* Tooltip - khi hover vào posTag */
+.posTag:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Đổi màu posTag khi phần tử highlight và được in đậm */
+.highlight.selected-posTag .posTag {
+
+    font-weight: bold;  /* In đậm */
+}
+
+/* Khi nhấn vào một posTag */
+.selected-posTag {
+    font-weight: bold;
+}
+
+/* Nhạt các từ không được chọn */
+.deselected-text {
+    opacity: 0.3;
+}
+
+/* Nhạt các posTag của từ không được chọn */
+.deselected-posTag {
+    opacity: 0.3;
+}
+
+/* Mờ các highlight khi posTag được chọn */
+.faded {
+    opacity: 1;  /* Làm mờ 80% */
+    pointer-events: none;  /* Không cho phép các sự kiện chuột như hover hay click */
+}
+
+.textWithTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.textWithTags span {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Cho phép định vị tooltip tương đối với mỗi entity */
+/* Đặt vị trí tương đối cho phần text để định vị tooltip */
+.entity-text {
+    position: relative;
+}
+
+/* Nếu data-meaning khác giá trị mặc định thì gạch chân (underline dotted) phần text */
+.entity-text[data-meaning]:not([data-meaning="Chưa có chú giải cho từ này"]) {
+    text-decoration: underline #000;
+    cursor: pointer;
+}
+
+/* Khi hover vào phần text, hiển thị tooltip chứa nội dung data-meaning */
+.entity-text:hover::after {
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    max-width: 300px; /* Giới hạn chiều ngang */
+    max-height: 150px; /* Giới hạn chiều dọc */
+    overflow-y: auto;  /* Hiển thị thanh cuộn dọc khi vượt quá chiều dọc */
+    word-wrap: break-word; /* Tự động xuống dòng khi nội dung quá dài */
+    white-space: normal; /* Cho phép xuống dòng tự động */
+    z-index: 100;
+}
+
+/* Đặt vị trí tương đối cho phần text để định vị tooltip */
+.entity-text {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    max-width: 300px; /* Giới hạn chiều ngang */
+    max-height: 150px; /* Giới hạn chiều dọc */
+    overflow-y: auto;  /* Hiển thị thanh cuộn dọc khi vượt quá chiều dọc */
+    word-wrap: break-word; /* Tự động xuống dòng khi nội dung quá dài */
+    white-space: normal; /* Cho phép xuống dòng tự động */
+    z-index: 9999; /* Đảm bảo tooltip luôn hiển thị trên các phần tử khác */
+    opacity: 0;
+    transition: opacity 0.3s ease;  /* Hiệu ứng mượt mà khi hiển thị */
+}
+
+/* Hiển thị tooltip khi hover */
+.tooltip.visible {
+    opacity: 1;
+}
+
+/* Nếu bạn muốn tooltip có một chút khoảng cách với từ */
+.tooltip div {
+    margin-bottom: 5px;
+}
+
+
+/* Nút Tra cứu Wikipedia bên trong tooltip */
+.tooltip button {
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.tooltip button {
+    display: block;
+    margin: 0px auto 0 auto; /* căn giữa theo chiều ngang, với khoảng cách top là 10px */
+    text-align: center;
+}

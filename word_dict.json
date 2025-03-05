@@ -1,0 +1,44 @@
+[
+    {
+        "text": "gaming",
+        "meaning": "chơi trò chơi",
+        "posTag": "N",
+        "nerLabel": "O"
+    },
+    {
+        "text": "lol",
+        "meaning": "Liên Minh Huyền Thoại",
+        "posTag": "Ny",
+        "nerLabel": "O"
+    },
+    {
+        "text": "thủ tướng chính phủ",
+        "meaning": "Ông Phạm Minh Chính",
+        "posTag": "Np",
+        "nerLabel": "O"
+    },
+    {
+        "text": "ngân hàng nhà nước",
+        "meaning": "Ngân hàng Nhà nước (NHNN) là cơ quan quản lý nhà nước về tiền tệ, ngân hàng tại Việt Nam. NHNN chịu trách nhiệm điều hành chính sách tiền tệ, phát hành tiền và quản lý hoạt động của các ngân hàng thương mại. Hiện tại, Thống đốc NHNN là Nguyễn Thị Hồng.",
+        "posTag": "",
+        "nerLabel": "ORG"
+    },
+    {
+        "text": "trung bình",
+        "meaning": "Trung bình là một thuật ngữ trong toán học, dùng để chỉ giá trị trung bình của một tập hợp số liệu. Nó có thể là trung bình cộng, trung bình nhân hay trung bình gia quyền, tùy thuộc vào ngữ cảnh. Trung bình giúp phân tích và so sánh dữ liệu một cách rõ ràng hơn.",
+        "posTag": "",
+        "nerLabel": "O"
+    },
+    {
+        "text": "tình hình",
+        "meaning": "Tình hình có thể chỉ trạng thái, diễn biến của một sự kiện, một vấn đề hoặc một hoàn cảnh cụ thể. Nó cũng có thể đề cập đến cảm xúc hay tâm trạng của con người. Ngoài ra, \"tình hình\" có thể dùng để xác định vị trí địa lý hay tình trạng của một khu vực nào đó.",
+        "posTag": "",
+        "nerLabel": "O"
+    },
+    {
+        "text": "hà nội",
+        "meaning": "Hà Nội là thủ đô của Việt Nam, nằm ở phía Bắc của đất nước. Thành phố này nổi bật với di sản văn hóa, lịch sử và kiến trúc phong phú. Hà Nội cũng là trung tâm chính trị, kinh tế và văn hóa quan trọng của Việt Nam.",
+        "posTag": "",
+        "nerLabel": "LOC"
+    }
+]
