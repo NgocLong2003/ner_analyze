@@ -20,6 +20,7 @@ def tach_thanh_cum(data, text):
   start_hien_tai = []
   end_hien_tai = []
   checkpoint = -1
+  start_ao = 0
 
 
 
@@ -59,6 +60,12 @@ def tach_thanh_cum(data, text):
             end_hien_tai.append(i + len(tu))
             checkpoint = i
             break
+        if start_hien_tai == []:
+          start_hien_tai.append(start_ao)
+          end_hien_tai.append(start_ao + len(tu))
+          start_ao += len(tu) + 1
+        else:
+          start_ao += len(tu) + 1
         cac_cum.append({'text': " ".join(cum_hien_tai).replace("_", " "), 'posTag': pos_tag_hien_tai[0], 'nerLabel': tag, 'start': start_hien_tai[0], 'end': end_hien_tai[-1], 'check': 0, 'meaning':''}) # Add tuple (text, posTag)
         # cac_cum.append((" ".join(cum_hien_tai).replace("_", " "), pos_tag_hien_tai[0])) # Add tuple (text, posTag)
         cum_hien_tai = []
@@ -71,7 +78,12 @@ def tach_thanh_cum(data, text):
         next_word_info = sentence[word_info['index']]
         next_tag = next_word_info['nerLabel']
         if not (next_tag.startswith("I-") and tag.startswith(("B-", "I-"))) and cum_hien_tai:
-
+          if start_hien_tai == []:
+            start_hien_tai.append(start_ao)
+            end_hien_tai.append(start_ao + len(tu))
+            start_ao += len(tu) + 1
+          else:
+            start_ao += len(tu) + 1             
           cac_cum.append({'text': " ".join(cum_hien_tai).replace("_", " "), 'posTag': pos_tag_hien_tai[0], 'nerLabel': tag[-3:], 'start': start_hien_tai[0], 'end': end_hien_tai[-1], 'check': 0, 'meaning':''}) # Add tuple (text, posTag)
           cum_hien_tai = []
           pos_tag_hien_tai = [] # Reset posTag list
@@ -79,6 +91,12 @@ def tach_thanh_cum(data, text):
           end_hien_tai = []
       except IndexError:  # Xử lý trường hợp từ cuối cùng trong câu
         if cum_hien_tai:
+          if start_hien_tai == []:
+            start_hien_tai.append(start_ao)
+            end_hien_tai.append(start_ao + len(tu))
+            start_ao += len(tu) + 1
+          else:
+            start_ao += len(tu) + 1
           cac_cum.append({'text': " ".join(cum_hien_tai).replace("_", " "), 'posTag': pos_tag_hien_tai[0], 'nerLabel': tag[-3:], 'start': start_hien_tai[0], 'end': end_hien_tai[-1], 'check': 0, 'meaning':''}) # Add tuple (text, posTag)
           cum_hien_tai = []
           pos_tag_hien_tai = []# Reset posTag list

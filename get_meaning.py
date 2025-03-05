@@ -66,7 +66,7 @@ def get_meaning(merge_entities, text):
             # Kiểm tra các thực thể trong merge_entities
             for i, entity in enumerate(merge_entities):
                 # Nếu thực thể nằm trong phạm vi của từ này (start và end của entity nằm trong start_word và end_word)
-                if entity['start'] >= start_word and entity['end'] <= end_word:
+                if (entity['start'] in range (start_word-3,start_word+3))  and (entity['end'] in range (end_word-3,end_word+3)):
                     potential_merges.append(entity)
                     indices_to_remove.append(i)
 

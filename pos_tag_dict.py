@@ -1,4 +1,24 @@
 pos_tag_dict = {
-    'N': "Noun - danh từ",
-    'Ny': "danh từ viết tắt"
+    'N': "Noun - Danh từ: Đại diện cho người, vật, sự vật, hoặc ý tưởng.",
+    'V': "Verb - Động từ: Diễn đạt hành động, sự việc hoặc trạng thái.",
+    'A': "Adjective - Tính từ: Mô tả tính chất hoặc đặc điểm của danh từ.",
+    'P': "Preposition - Giới từ: Chỉ mối quan hệ không gian, thời gian.",
+    'T': "Pronoun - Đại từ: Thay thế cho danh từ trong câu.",
+    'C': "Conjunction - Liên từ: Kết nối các từ, cụm từ hoặc câu.",
+    'I': "Possessive Pronoun - Đại từ sở hữu: Chỉ sự sở hữu.",
+    'M': "Numeral - Số từ: Chỉ số lượng hoặc thứ tự.",
+    'L': "Location - Địa điểm: Chỉ tên các địa điểm hoặc vùng miền.",
+    'E': "Infinitive Verb - Động từ nguyên thể: Dạng chưa chia của động từ, thường có 'to'.",
+    'Ny': "Proper Noun, singular - Danh từ riêng số ít: Tên riêng của người, địa danh ở số ít.",
+    'Np': "Proper Noun, plural - Danh từ riêng số nhiều: Danh từ riêng ở dạng số nhiều.",
+    'Cc': "Coordinating Conjunction - Liên từ kết hợp: Kết nối các phần câu cùng cấp độ.",
+    'Nc': "Common Noun - Danh từ chung: Danh từ chỉ sự vật chung, không phải tên riêng.",
+    'Nb': "Singular Noun - Danh từ số ít: Danh từ ở số ít.",
+    'Npl': "Plural Noun - Danh từ số nhiều: Danh từ ở số nhiều.",
+    'Vb': "Base form Verb - Động từ nguyên thể: Động từ ở dạng gốc, chưa chia.",
+    'Vbd': "Past Tense Verb - Động từ quá khứ: Động từ chỉ hành động đã xảy ra trong quá khứ.",
+    'Vbg': "Gerund Verb - Động từ dạng hiện tại tiếp diễn: Động từ đang xảy ra.",
+    'Vbn': "Past Participle Verb - Động từ phân từ quá khứ: Động từ ở dạng phân từ.",
+    'Vbp': "Verb, base form - Động từ không chia: Động từ ở dạng chưa chia, dùng cho ngôi số 1 và số nhiều.",
+    'Vbz': "Verb, 3rd person singular - Động từ chia ngôi số 3 số ít."
 }

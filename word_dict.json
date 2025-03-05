@@ -40,5 +40,89 @@
         "meaning": "Hà Nội là thủ đô của Việt Nam, nằm ở phía Bắc của đất nước. Thành phố này nổi bật với di sản văn hóa, lịch sử và kiến trúc phong phú. Hà Nội cũng là trung tâm chính trị, kinh tế và văn hóa quan trọng của Việt Nam.",
         "posTag": "",
         "nerLabel": "LOC"
+    },
+    {
+        "text": "bắc ninh",
+        "meaning": "Bắc Ninh là một tỉnh nằm ở miền Bắc Việt Nam, cách Hà Nội khoảng 30 km. Tỉnh này nổi tiếng với nhiều di sản văn hóa và truyền thống, như quan họ Bắc Ninh. Bắc Ninh cũng là trung tâm công nghiệp và kinh tế phát triển nhanh chóng trong nước.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "mv",
+        "meaning": "MV thường là viết tắt của \"music video\", tức là đoạn video minh họa cho một bài hát. Ngoài ra, MV cũng có thể là tên viết tắt của các tổ chức hoặc địa điểm khác ở từng ngữ cảnh cụ thể. Nếu cần thông tin cụ thể hơn, bạn hãy cung cấp ngữ cảnh rõ ràng hơn nhé!",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "thương mại",
+        "meaning": "Thương mại là hoạt động mua bán hàng hóa và dịch vụ giữa các cá nhân, tổ chức hoặc quốc gia. Nó diễn ra trong nhiều hình thức như thương mại nội địa và quốc tế. Thương mại đóng vai trò quan trọng trong phát triển kinh tế và giao lưu văn hóa.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "diễn viên",
+        "meaning": "Diễn viên là người thể hiện vai diễn trong các tác phẩm nghệ thuật như phim, kịch, hoặc truyền hình. Họ có thể hoạt động tự do hoặc ký hợp đồng với các nhà sản xuất. Nơi diễn xuất thường là rạp hát, phim trường hoặc các địa điểm quay phim.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "xuân hinh",
+        "meaning": "Xuân Hinh là một nghệ sĩ hài nổi tiếng của Việt Nam, được biết đến với nhiều vai diễn trong các chương trình chèo và tiểu phẩm hài. Ông có phong cách diễn xuất duyên dáng và hài hước, được yêu thích bởi nhiều thế hệ khán giả. Xuân Hinh còn được mệnh danh là \"vua hài đất Bắc\".",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "hoà minzy",
+        "meaning": "Hoà Minzy là một ca sĩ nổi tiếng người Việt Nam, tên thật là Nguyễn Thị Hòa. Cô sinh ngày 31 tháng 5 năm 1996 và nổi bật với nhiều bản hit trong làng nhạc Việt. Ngoài ca hát, cô còn tham gia vào các chương trình truyền hình và làm người mẫu.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "ê kíp",
+        "meaning": "Ê kíp là một nhóm người làm việc cùng nhau trong lĩnh vực nghệ thuật, sản xuất phim, hoặc sự kiện, để hoàn thành một dự án nhất định. Thuật ngữ này thường được sử dụng trong ngành điện ảnh, truyền hình và sự kiện. Ê kíp thường bao gồm đạo diễn, nhà sản xuất, quay phim, và các chuyên gia khác.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "tuấn cry",
+        "meaning": "Tuấn Cry là một YouTuber, streamer nổi tiếng ở Việt Nam, chuyên về game và giải trí. Anh được biết đến với những video hài hước và lối nói chuyện duyên dáng. Tuấn Cry thu hút một lượng lớn người theo dõi trên các nền tảng mạng xã hội.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "bắc bling",
+        "meaning": "Bắc Bling hay Bắc Bling (Bắc Ninh) là một MV của nữ ca sĩ Hòa Minzy phối hợp với danh hài Xuân Hinh và nhạc sĩ Tuấn Cry. Nó được phát hành trên YouTube vào tối ngày 1 tháng 3 năm 2025 trên kênh YouTube của Hòa Minzy",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "chuyển động 24h",
+        "meaning": "Chuyển động 24h là chương trình tin tức do Trung tâm Sản xuất và Phát triển nội dung số, Đài Truyền hình Việt Nam sản xuất, lên sóng lần đầu tiên vào ngày 10 tháng 10 năm 2014.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "cát-xê",
+        "meaning": "Cát-xê là phiên cách đọc của một từ tiếng Pháp: cachet, có nghĩa là “tiền thù lao”. Thông thường trong các chương trình biểu diễn nghệ thuật (ca nhạc, tạp kĩ...), ban tổ chức phải tính đến các chi phí, trong đó có tiền chi trả, bồi dưỡng cho những nghệ sĩ tham gia.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "cát xê",
+        "meaning": "Cát-xê là phiên cách đọc của một từ tiếng Pháp: cachet, có nghĩa là “tiền thù lao”. Thông thường trong các chương trình biểu diễn nghệ thuật (ca nhạc, tạp kĩ...), ban tổ chức phải tính đến các chi phí, trong đó có tiền chi trả, bồi dưỡng cho những nghệ sĩ tham gia.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "catxe",
+        "meaning": "Cát-xê là phiên cách đọc của một từ tiếng Pháp: cachet, có nghĩa là “tiền thù lao”. Thông thường trong các chương trình biểu diễn nghệ thuật (ca nhạc, tạp kĩ...), ban tổ chức phải tính đến các chi phí, trong đó có tiền chi trả, bồi dưỡng cho những nghệ sĩ tham gia.",
+        "posTag": "",
+        "nerLabel": "null"
+    },
+    {
+        "text": "hòa minzy",
+        "meaning": "Hoà Minzy là một ca sĩ nổi tiếng người Việt Nam, sinh năm 1995. Cô được biết đến với nhiều bài hát hit và phong cách âm nhạc đặc sắc. Ngoài ra, Hoà Minzy còn tham gia các chương trình truyền hình thực tế và là gương mặt quen thuộc trong làng giải trí Việt.",
+        "posTag": "",
+        "nerLabel": "null"
     }
 ]
